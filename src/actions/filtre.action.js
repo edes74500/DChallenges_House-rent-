@@ -48,7 +48,7 @@ export const filteredList = () => {
   return (dispatch, getState) => {
     const { filterList } = getState();
     const { propertyList } = getState();
-    console.log(propertyList.available);
+    // console.log(propertyList.available);
     let displayedList = propertyList.available
       .slice()
       .filter((house) => {
