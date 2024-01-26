@@ -10,26 +10,26 @@ import rootReducer from "./reducers/index";
 import { fetchPropertyList } from "./actions/fetch.action";
 import HouseList from "./components/HouseList";
 
-const store = configureStore({
-  reducer: rootReducer,
-  devTools: true,
-});
+// const store = configureStore({
+//   reducer: rootReducer,
+//   devTools: true,
+// });
 
-store.dispatch(fetchPropertyList());
+// store.dispatch(fetchPropertyList());
 function App() {
   return (
-    <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path="*" element={<Home />} />
-          <Route path="/" element={<Home />}>
-            <Route index element={<HouseList />} />
-            <Route path="/:title" element={<HouseDetail />} />
-            <Route path="*" replace element={<Navigate to="/" />} />
-          </Route>
-        </Routes>
-      </Router>
-    </Provider>
+    // <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route path="*" element={<Home />} />
+        <Route path="/" element={<Home />}>
+          <Route index element={<HouseList />} />
+          <Route path="/:title" element={<HouseDetail />} />
+          <Route path="*" replace element={<Navigate to="/" />} />
+        </Route>
+      </Routes>
+    </Router>
+    // </Provider>
   );
 }
 
