@@ -3,6 +3,7 @@ import CountryFilter from "./CountryFilter";
 import SuperHostFilter from "./SuperHostFilter";
 import TypeFilter from "./TypeFilter";
 import styled from "styled-components";
+import breakpoints from "../../styles/breakpoints";
 
 const StyledFilterContainer = styled.div`
   border: 1px solid black;
@@ -23,6 +24,11 @@ const StyledFilterContainer = styled.div`
   padding: 32px 40px;
   border-radius: 10px;
   border: 1px solid var(--light-grey-1);
+  @media screen and (max-width: ${breakpoints.tablet}px) {
+    flex-direction: column;
+    padding: 18px 10px;
+    gap: 18px;
+  }
   .right-container {
     display: flex;
     gap: 20px;

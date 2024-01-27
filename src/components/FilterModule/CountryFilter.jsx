@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { disableCountryFilter, toogleCountryFilter } from "../../actions/filtre.action";
 import styled from "styled-components";
+import breakpoints from "../../styles/breakpoints";
 
 const StyledCountryFilter = styled.div`
   display: flex;
@@ -21,6 +22,11 @@ const StyledCountryFilter = styled.div`
       cursor: pointer;
       padding: 8px 12px;
       border-radius: 10px;
+      @media screen and (max-width: ${breakpoints.mobile}px) {
+        flex-direction: column;
+        padding: 8px 6px;
+        /* padding: 32px 10px; */
+      }
     }
 
     input[type="checkbox"]:checked + label {

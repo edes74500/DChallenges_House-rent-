@@ -14,10 +14,10 @@ const StyledHeroSection = styled.div`
   .text-container {
     padding-top: 180px;
     padding-left: 140px;
-    @media screen and (min-width: ${breakpoints.tablet}px) {
+    @media screen and (max-width: ${breakpoints.tablet}px) {
       padding-left: 112px;
     }
-    @media screen and (min-width: ${breakpoints.mobile}px) {
+    @media screen and (max-width: ${breakpoints.mobile}px) {
       padding-left: 64px;
     }
     h1 {
