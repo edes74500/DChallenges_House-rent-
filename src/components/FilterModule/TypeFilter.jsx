@@ -75,6 +75,7 @@ const StyledTypeFilter = styled.div`
   }
 
   .custom-select {
+    position: relative;
     .select-button {
       cursor: pointer;
       width: 200px;
@@ -96,34 +97,62 @@ const StyledTypeFilter = styled.div`
         position: absolute;
         width: 35px;
         height: 35px;
-        /* background-color: red; */
+
         top: 50%;
         left: 90%;
         z-index: 10;
         color: white;
-        transform: translate(-50%, -50%);
+        transition: 0.5s ease-in-out;
+        transform: translate(-50%, -50%) ${({ $listIsOpen }) => ($listIsOpen ? "rotate(90deg)" : "rotate(0)")};
         fill: white;
       }
     }
     .select-dropdown {
-      display: none;
+      /* display: none; */
+      transform: scaleY(0);
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      width: 100%;
       margin-top: 15px;
       border: 2px solid var(--light-grey-1);
       border-radius: 10px;
       background-color: var(--light-grey-1);
+      overflow: hidden;
+      transition: 0.3s ease-in-out;
+      &.is-open {
+        /* display: none; */
+        transform: scaleY(1);
+        opacity: 1;
+        visibility: visible;
+      }
+      input[type="radio"] {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+      }
+      input:checked ~ label {
+        background-color: var(--blue-1);
+      }
+      input:focus ~ label {
+        background-color: var(--blue-1);
+      }
       .item-select {
         height: 50px;
         display: flex;
         /* justify-content: center; */
         align-items: center;
         label {
+          padding-left: 12px;
           display: flex;
           align-items: center;
+          /* border-radius: 10px; */
           height: 100%;
           width: 100%;
           cursor: pointer;
         }
-        &:hover {
+        &:hover,
+        &:checked {
           background-color: var(--blue-1);
         }
       }
@@ -133,50 +162,46 @@ const StyledTypeFilter = styled.div`
 
 const TypeFilter = () => {
   const typeAvailable = useSelector((state) => state.filterList.type.available);
-  const [userHasInteracted, setUserHasInteracted] = React.useState(false);
   const dispatch = useDispatch();
+  const dropDownRef = React.useRef(null);
+  const [listIsOpen, setListIsOpen] = React.useState(false);
 
-  const handleOnClick = (type) => {
-    console.log(type);
-    dispatch(toogleTypeFilter(type));
-    setUserHasInteracted(true);
+  const handleOnChange = (e) => {
+    const selectedValue = dropDownRef.current.querySelector(".selected-value");
+    dispatch(toogleTypeFilter(e.target.value));
+    // setUserHasInteracted(true);
+    selectedValue.textContent = e.target.id;
+    toogleList();
+  };
+
+  const handleOnClick = () => {
+    toogleList();
+    console.log(dropDownRef.current);
+  };
+
+  const toogleList = () => {
+    const dropDownItems = dropDownRef.current.querySelector(".select-dropdown");
+    const isOpen = !listIsOpen;
+    setListIsOpen(isOpen);
+    if (isOpen) {
+      dropDownItems.classList.add("is-open");
+    } else dropDownItems.classList.remove("is-open");
   };
 
   return (
-    <StyledTypeFilter>
-      {/* <div className="select-wrapper">
-        <select name="type" id="propertyType" defaultValue={"DEFAULT"} onChange={(e) => handleOnClick(e.target.value)}>
-          <option value="DEFAULT" disabled hidden={!userHasInteracted}>
-            Property Type
-          </option>
-          <option value="" style={{ padding: "20px" }} className="test">
-            All
-          </option>
-          {typeAvailable.map((type) => (
-            <option key={type.name} value={type.place}>
-              {type.name}
-            </option>
-          ))}
-        </select>
-      </div> */}
-      <div className="custom-select">
-        <div className="select-button">
+    <StyledTypeFilter $listIsOpen={listIsOpen}>
+      <div className="custom-select" ref={dropDownRef}>
+        <div className="select-button" onClick={handleOnClick}>
           <span className="selected-value">Property Type</span>
         </div>
         <ul className="select-dropdown">
           <li className="item-select">
-            <input type="radio" value="" id="all" name="type" onChange={(e) => handleOnClick(e.target.value)} />
-            <label htmlFor="all">All</label>
+            <input type="radio" value="s" id="Any type" name="type" onClick={(e) => handleOnChange(e)} />
+            <label htmlFor="Any type">Any type</label>
           </li>
           {typeAvailable.map((type) => (
             <li className="item-select" key={type.name}>
-              <input
-                type="radio"
-                value={type.place}
-                id={type.name}
-                name="type"
-                onChange={(e) => handleOnClick(e.target.value)}
-              />
+              <input type="radio" value={type.place} id={type.name} name="type" onClick={(e) => handleOnChange(e)} />
               <label htmlFor={type.name}>{type.name}</label>
             </li>
           ))}
