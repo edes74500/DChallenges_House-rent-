@@ -6,16 +6,43 @@ import styled from "styled-components";
 
 const StyledFilterContainer = styled.div`
   border: 1px solid black;
-  background-color: pink;
+  background-color: var(--dark-grey-2);
+  position: absolute;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1300px;
+  /* margin: 10px; */
+  /* width: 100%; */
+  width: 90%;
+  color: var(--white-1);
+  min-height: 120px;
+  padding: 32px 40px;
+  border-radius: 10px;
+  border: 1px solid var(--light-grey-1);
+  .right-container {
+    display: flex;
+    gap: 20px;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* max-width: 1100px; */
+    /* width: 100%; */
+  }
 `;
 
 const FilterContainer = () => {
   return (
     <StyledFilterContainer>
-      filters :
-      <CountryFilter />
-      <SuperHostFilter />
-      <TypeFilter />
+      <div className="left-container">
+        <CountryFilter />
+      </div>
+      <div className="right-container">
+        <SuperHostFilter />
+        <TypeFilter />
+      </div>
     </StyledFilterContainer>
   );
 };

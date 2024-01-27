@@ -15,11 +15,11 @@ const initialState = {
   type: {
     available: [
       {
-        name: "single bedroom",
+        name: "Single bedroom",
         place: 1,
       },
       {
-        name: "double bedroom",
+        name: "Double bedroom",
         place: 2,
       },
     ],

@@ -1,16 +1,45 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { disableCountryFilter, toogleCountryFilter } from "../../actions/filtre.action";
+import styled from "styled-components";
+
+const StyledCountryFilter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  user-select: none;
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* background-color: red; */
+    label {
+      transition: 0.3s all ease-in-out;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 10px;
+    }
+
+    input[type="checkbox"]:checked + label {
+      /* Styles à appliquer lorsque l'input est coché */
+      background-color: var(--light-grey-1);
+      /* color: blue; */
+      /* font-weight: bold; */
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+  }
+`;
 
 const CountryFilter = () => {
   const countriesAvailable = useSelector((state) => state.filterList.countries.available);
   const countriesSelected = useSelector((state) => state.filterList.countries.selected);
   const dispatch = useDispatch();
-
-  //   React.useEffect(() => {
-  //     console.log(countriesAvailable);
-  //     console.log(countriesSelected);
-  //   }, [countriesAvailable, countriesSelected]);
 
   const handleOnClick = (country) => {
     dispatch(toogleCountryFilter(country));
@@ -37,23 +66,19 @@ const CountryFilter = () => {
   };
 
   return (
-    <div>
-      <>
-        <div>
-          <label htmlFor="disable-country-filter">All countries</label>
-          <input
-            type="checkbox"
-            id="disable-country-filter"
-            onChange={handleAllDisplay}
-            checked={checkIfAllCountriesAreDisplayed()}
-          />
-        </div>
-        ---------------------
-      </>
+    <StyledCountryFilter>
+      <div className="checkbox">
+        <input
+          type="checkbox"
+          id="disable-country-filter"
+          onChange={handleAllDisplay}
+          checked={checkIfAllCountriesAreDisplayed()}
+        />
+        <label htmlFor="disable-country-filter">All stays</label>
+      </div>
       {countriesAvailable.map((country, index) => {
         return (
-          <div key={index} data-country={country}>
-            <label htmlFor={country}>{country}</label>
+          <div key={index} data-country={country} className="checkbox">
             <input
               type="checkbox"
               name={country}
@@ -61,11 +86,11 @@ const CountryFilter = () => {
               onChange={() => handleOnClick(country)}
               checked={checkSelectedCountry(country)}
             />
+            <label htmlFor={country}>{country}</label>
           </div>
         );
       })}
-      ---------------------
-    </div>
+    </StyledCountryFilter>
   );
 };
 
