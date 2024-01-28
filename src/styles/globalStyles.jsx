@@ -21,6 +21,7 @@ export const globalStyles = css`
   body {
     background-color: var(--dark-grey-1);
     font-family: "Outfit Variable", sans-serif;
+    scroll-behavior: smooth;
   }
 
   html {

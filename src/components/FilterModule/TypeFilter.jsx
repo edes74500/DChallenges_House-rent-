@@ -196,7 +196,7 @@ const TypeFilter = () => {
         </div>
         <ul className="select-dropdown">
           <li className="item-select">
-            <input type="radio" value="s" id="Any type" name="type" onClick={(e) => handleOnChange(e)} />
+            <input type="radio" value="" id="Any type" name="type" onClick={(e) => handleOnChange(e)} />
             <label htmlFor="Any type">Any type</label>
           </li>
           {typeAvailable.map((type) => (

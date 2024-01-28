@@ -32,7 +32,9 @@ const StyledFilterContainer = styled.div`
   .right-container {
     display: flex;
     gap: 20px;
-    /* align-items: center; */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     /* justify-content: space-between; */
     /* max-width: 1100px; */
     /* width: 100%; */
