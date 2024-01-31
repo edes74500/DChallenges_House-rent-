@@ -1,10 +1,11 @@
-import { FETCH_PROPERTY_LIST, SET_COUNTRY_LIST } from "../actions/fetch.action";
+import { FETCH_PROPERTY_LIST, IS_LOADING_PROPERTY_LIST, SET_COUNTRY_LIST } from "../actions/fetch.action";
 import { SET_DISPLAYED_PROPERTIES } from "../actions/filtre.action";
 
 const initialState = {
   available: [],
   selected: [],
   countries: [],
+  isLoading: false,
 };
 export const propertyList = (state = initialState, action) => {
   switch (action.type) {
@@ -22,6 +23,11 @@ export const propertyList = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload,
+      };
+    case IS_LOADING_PROPERTY_LIST:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       return state;

@@ -4,37 +4,59 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 const HouseDetail = () => {
   const title = useParams().title;
-  //   const houseID = parseInt(id);
-  const houses = useSelector((state) => state.propertyList.selected);
-  const currentHouse = houses.find((house) => house.title === title);
   const navigate = useNavigate();
-  const [shouldRedirect, setShouldRedirect] = useState(false);
-
-  //stock la valeur de house dans le ref
+  const houses = useSelector((state) => state.propertyList.selected);
   const prevHousesRef = useRef(houses);
-  useEffect(() => {
-    if (JSON.stringify(prevHousesRef.current) !== JSON.stringify(houses)) {
-      setShouldRedirect(true);
-    }
-    prevHousesRef.current = houses;
-    console.log(prevHousesRef.current);
-  }, [houses]);
+  const isLoadingPopertyList = useSelector((state) => state.propertyList.isLoading);
+  const currentHouse = houses.find((house) => house.title === title);
+  // let decodedTitle = decodeURIComponent(title);
+
+  //   const houseID = parseInt(id);
+
+  // const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
-    if (shouldRedirect) {
+    if (currentHouse) {
+      prevHousesRef.current = houses;
+    }
+  }, [currentHouse]);
+
+  useEffect(() => {
+    if (prevHousesRef.current && prevHousesRef.current !== houses && !isLoadingPopertyList) {
+      // setShouldRedirect(true);
+      console.log("changed filters : redirect");
       navigate("/");
     }
-  }, [shouldRedirect]);
+  }, [houses]);
 
-  if (!currentHouse) {
-    return <Navigate to="/" />;
-  }
+  // useEffect(() => {
+  //   if (shouldRedirect && !isLoadingPopertyList) {
+  //     console.log("back avec use <effet></effet>");
+  //   }
+  // }, [shouldRedirect]);
+
+  useEffect(() => {
+    document.title = title
+      ? ` ${title} | House Renting `
+      : "House Renting | Find the next place to live an amazing retreat";
+    return () => {
+      document.title = "House Renting | Find the next place to live an amazing retreat";
+    };
+  }, [title, isLoadingPopertyList]);
+
+  // if (!currentHouse && !isLoadingPopertyList) {
+  //   console.log("WRONG ADRESS");
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <div>
-      TEST SINGLE HOUSE {currentHouse.title}
-      <img src={currentHouse.image} alt="" />
-      {/* <img src="" alt="" /> */}
+      {!isLoadingPopertyList && currentHouse && (
+        <>
+          TEST SINGLE HOUSE {currentHouse.title}
+          <img src={currentHouse.image} alt="" />
+        </>
+      )}
     </div>
   );
 };

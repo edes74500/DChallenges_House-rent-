@@ -115,9 +115,11 @@ const StyledTypeFilter = styled.div`
       position: absolute;
       width: 100%;
       margin-top: 15px;
-      border: 2px solid var(--light-grey-1);
+      /* border: 2px solid var(--light-grey-1); */
       border-radius: 10px;
+      background-color: var(--light-grey-2);
       background-color: var(--light-grey-1);
+
       overflow: hidden;
       transition: 0.3s ease-in-out;
       &.is-open {
@@ -132,13 +134,14 @@ const StyledTypeFilter = styled.div`
         opacity: 0;
       }
       input:checked ~ label {
+        background-color: var(--light-grey-2);
         background-color: var(--blue-1);
       }
       input:focus ~ label {
         background-color: var(--blue-1);
       }
       .item-select {
-        height: 50px;
+        height: 40px;
         display: flex;
         /* justify-content: center; */
         align-items: center;
@@ -153,6 +156,7 @@ const StyledTypeFilter = styled.div`
         }
         &:hover,
         &:checked {
+          background-color: var(--light-grey-1);
           background-color: var(--blue-1);
         }
       }

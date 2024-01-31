@@ -56,9 +56,9 @@ export const filteredList = () => {
           ? filterList.countries.selected.includes(house.location)
           : house;
       })
-      .filter((house) => {
-        return filterList.superHost ? house.superhost : house;
-      })
+      // .filter((house) => {
+      //   return filterList.superHost ? house.superhost : house;
+      // })
       .filter((house) => {
         return filterList.type.selected.length > 0 ? house.capacity.bedroom == Number(filterList.type.selected) : house;
       });

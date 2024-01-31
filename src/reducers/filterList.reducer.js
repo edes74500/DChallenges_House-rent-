@@ -11,7 +11,7 @@ const initialState = {
     available: [],
     selected: [],
   },
-  superHost: false,
+  superHost: true,
   type: {
     available: [
       {

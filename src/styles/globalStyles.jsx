@@ -10,12 +10,14 @@ export const globalStyles = css`
     --blue-1: #4e80ee; // Exem
     --orange-1: #f6c768; // Exem
     --white-1: #f2f9fe; // Exem
+    --white-2: #848d97;
   }
 
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    text-decoration: none;
   }
 
   body {

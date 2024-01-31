@@ -33,8 +33,8 @@ function App() {
           <Route path="/" element={<Home />}>
             <Route index element={<HouseList />} />
             <Route path="/:title" element={<HouseDetail />} />
-            {/* <Route path="*" replace element={<Navigate to="/" />} /> */}
-            <Route path="*" element={<HouseDetail />} />
+            <Route path="*" replace element={<Navigate to="/" />} />
+            {/* <Route path="*" element={<HouseDetail />} /> */}
           </Route>
         </Routes>
         {/* </Router> */}

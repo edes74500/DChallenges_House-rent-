@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import HouseCard from "./HouseCard";
 import styled from "styled-components";
@@ -25,9 +25,9 @@ const StyledHouseList = styled.div`
     /* display: flex;
     flex-wrap: wrap;
     flex-basis: 20%;
-    flex-grow: 1; */
+    flex-grow: 1;
+    flex-wrap: nowrap; */
     /* justify-content: space-between; */
-    /* flex-wrap: nowrap; */
     row-gap: 72px;
     column-gap: 32px;
   }
@@ -55,6 +55,10 @@ const HouseList = () => {
   const houses = useSelector((state) => state.propertyList.selected);
   const allhouses = useSelector((state) => state.propertyList.available);
   const filters = useSelector((state) => state.filterList);
+
+  // useEffect(() => {
+  //   document.title = "House Renting | Find the next place to live an amazing retreat";
+  // }, []);
 
   return (
     <StyledHouseList>
